@@ -34,7 +34,7 @@ def prepara_variabili(df: pd.DataFrame, gas: str = "PSV") -> pd.DataFrame:
 
     ``gas`` sceglie il prezzo del gas usato per ``Gas`` e ``MC_CCGT``:
     "PSV" (modello principale, variazioni da novembre 2016) oppure "TTF"
-    (tutto il periodo, come nella tesi). Il primo mese disponibile si perde
+    (tutto il periodo). Il primo mese disponibile si perde
     con la differenziazione.
     """
     out = df.copy()

@@ -7,7 +7,7 @@ Fonti
   (Europa, formato long).
 * Gas PSV : GME, mercati a pronti del gas (MGAS), prezzo medio ponderato
   giornaliero (foglio "DATI SBILANCIAMENTO" dei file "Anno termico").
-* Gas TTF (confronto con la tesi) : World Bank, Pink Sheet mensile, colonna
+* Gas TTF (specificazione alternativa) : World Bank, Pink Sheet mensile, colonna
   "Natural gas, Europe" (USD/MMBtu; dall'aprile 2015 è il prezzo Netherlands TTF),
   convertita in EUR/MWh con il cambio mensile FRED EXUSEU.
 * CO2 (EUA) : EEX, prezzi di aggiudicazione delle aste primarie EUA (EUR/tCO2).
@@ -177,7 +177,7 @@ def carica_gas_psv() -> pd.Series:
 
 
 # ---------------------------------------------------------------------------
-# Gas TTF (World Bank) e cambio EUR/USD (FRED): confronto con la tesi
+# Gas TTF (World Bank) e cambio EUR/USD (FRED): specificazione alternativa
 # ---------------------------------------------------------------------------
 def _serie_fred(sid: str) -> pd.Series:
     path = _download(FRED_URL.format(sid=sid), cfg.GREZZI / "fred" / f"{sid}.csv")

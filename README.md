@@ -7,7 +7,7 @@
 
 > **English summary.** An econometric study of the Italian wholesale electricity price (PUN) on monthly data, 2016–2025. An OLS model in log-differences with Newey-West errors estimates how the price responds to the marginal cost of gas-fired plants and to residual load (demand minus solar and wind). A 1% drop in residual load lowers the price by about 0.76%. A counterfactual without solar and wind puts the short-run wholesale saving at roughly €44 billion over nine years (95% CI: 32–58). The result survives instrumental variables, an error-correction model, sub-samples and alternative gas prices. Code, tests and a fully reproducible notebook are included; text and comments are in Italian.
 
-Analisi econometrica del **Prezzo Unico Nazionale (PUN)** dell'energia elettrica su dati mensili. Il lavoro nasce dalla mia tesi di laurea, poi rivista: dati corretti, specificazione migliorata, verifiche di robustezza e test automatici.
+Analisi econometrica del **Prezzo Unico Nazionale (PUN)** dell'energia elettrica su dati mensili. Il lavoro nasce dalla mia tesi di laurea.
 
 ![PUN osservato e stimato senza solare ed eolico](figure/controfattuale_merit_order.png)
 
@@ -73,7 +73,7 @@ La riduzione è più alta negli anni di prezzi elevati. Dipende dalla specificaz
 | Cointegrazione PUN – costo marginale | Engle-Granger −6,06 (p < 0,001); Johansen: una relazione |
 | Modello a correzione dell'errore (ECM) | elasticità di breve periodo 0,67 (IC: 0,49 – 0,85); 38,6 mld € |
 | Lungo periodo (DOLS) | elasticità al carico residuo 0,18 (IC: −0,12 – 0,48), non significativa |
-| Specificazione della tesi (gas TTF, senza idroelettrico) | elasticità 0,86; R² 0,80; 51,8 mld € |
+| Gas TTF, senza idroelettrico (feb 2016 – nov 2025) | elasticità 0,86; R² 0,80; 51,8 mld € |
 
 L'effetto di breve periodo resta positivo e significativo in tutte le verifiche.
 
@@ -117,26 +117,14 @@ python -m src.dati                # crea dati/elaborati/dataset_mensile.csv
 jupyter lab analisi_PUN.ipynb
 ```
 
-## Differenze rispetto alla tesi
+## Cosa aggiunge rispetto alla tesi
 
-Rivedendo il codice per la pubblicazione sono emersi due errori nei dati, ora corretti, e due punti deboli della specificazione.
-
-1. **Solare ed eolico**: il file Ember riporta ogni variabile in più unità; il codice originale ne faceva la media. Ora si usano solo i TWh.
-2. **Gas e CO2**: le serie usate in origine partivano dal 2017 e dal 2021; i mesi precedenti erano riempiti con un valore costante o con zero. Ora le serie sono complete, senza imputazioni.
-3. **Prezzo del gas**: il TTF usato nella tesi è un prezzo a termine, mentre il PUN è un prezzo spot. Messo nella stessa regressione, il prezzo spot italiano (PSV) lo sostituisce completamente.
-4. **Idroelettrico**: aggiunto come controllo; rende la stima più precisa.
+- **Prezzo del gas italiano.** Il costo marginale usa il prezzo spot del gas al PSV (GME), lo stesso tipo di prezzo del PUN. Il TTF olandese resta come specificazione alternativa: messi nella stessa regressione, il PSV spiega il PUN e il TTF non aggiunge nulla.
+- **Idroelettrico** come variabile di controllo.
+- **Nuove verifiche di robustezza**: variabili strumentali per la domanda, cointegrazione e modello a correzione dell'errore, gas e CO2 stimati separatamente, sotto-periodi, scenari controfattuali alternativi.
+- **Codice riproducibile**: pacchetto `src/`, test automatici, ricostruzione del dataset dalle fonti.
 
 ![Gas PSV e TTF](figure/gas_psv_ttf.png)
-
-| | Tesi | Dati corretti, stessa specificazione | Questa versione |
-|---|---|---|---|
-| Elasticità al costo marginale | 0,76 | 0,93 | 0,93 |
-| Elasticità al carico residuo | 0,40 | 0,86 | 0,76 |
-| R² | 0,67 | 0,80 | 0,92 |
-| Riduzione cumulata della spesa | 49,7 mld € | 51,8 mld € | 44,4 mld € |
-| Solare / eolico | −0,18 (p = 0,05) / −0,06 (p = 0,08) | −0,12 (p = 0,14) / −0,04 (p = 0,12) | −0,11 (p = 0,002) / −0,07 (p < 0,001) |
-
-La conclusione principale non cambia: un *Merit Order Effect* significativo, del valore di 40-50 miliardi di euro nel periodo.
 
 ## Fonti dei dati
 
