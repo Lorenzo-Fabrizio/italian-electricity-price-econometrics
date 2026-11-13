@@ -1,0 +1,3 @@
+-r requirements.txt
+# Solo per i test: confronto della stima 2SLS con una libreria di riferimento
+linearmodels==7.1

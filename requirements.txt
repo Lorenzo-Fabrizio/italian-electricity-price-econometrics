@@ -1,0 +1,14 @@
+# Versioni con cui sono stati prodotti i risultati del notebook
+pandas==3.0.1
+numpy==1.26.4
+statsmodels==0.14.6
+scipy==1.17.1
+matplotlib==3.10.8
+seaborn==0.13.2
+openpyxl==3.1.5      # lettura file GME e World Bank (.xlsx)
+xlrd==2.0.2          # lettura report aste EEX 2015-2019 (.xls)
+python-dateutil==2.9.0.post0   # calcolo della Pasqua per i giorni lavorativi
+jupyterlab==4.5.6
+nbconvert==7.17.0
+ipykernel==7.2.0
+pytest==9.2.0

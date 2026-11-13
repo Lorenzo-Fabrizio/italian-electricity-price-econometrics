@@ -1,0 +1,21 @@
+# Dati: non ridistribuiti. Si ricostruiscono dalle fonti (vedi dati/README.md)
+dati/grezzi/
+dati/elaborati/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter / test
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Editor / OS
+.vscode/
+.idea/
+.claude/
+Thumbs.db
+desktop.ini
+.DS_Store
